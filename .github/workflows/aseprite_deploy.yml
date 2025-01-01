@@ -82,7 +82,10 @@ jobs:
       shell: bash
       run: rm -f gen modp_b64_gen gen.exe gen.exe.manifest modp_b64_gen.exe modp_b64_gen.exe.manifest
     - name: Initialize setup exe
+      shell: bash
       run: |
+          ls
+          pwd
           unzip is.zip -d is
           unzip bin.zip -d aseprite/build/bin
     - name: Branding 2
