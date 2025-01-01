@@ -42,7 +42,7 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Install ninja
-      uses: seanmiddleditch/gha-setup-ninja@v1
+      uses: seanmiddleditch/gha-setup-ninja@master
     - name: Get Skia from cache
       id: skia-cache
       uses: actions/cache@v2
