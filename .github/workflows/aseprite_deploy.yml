@@ -59,11 +59,11 @@ jobs:
         curl -o Aseprite-source.zip -L ${{ inputs.aseprite_url }}
         unzip Aseprite-source.zip -d aseprite
         mkdir -p aseprite/build
+    - name: Setting Visual Studio build environment variables and paths
+      uses: seanmiddleditch/gha-setup-vsdevenv@master
     - name: Set architecture for the produced binary
       shell: cmd
       run: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
-    - name: Setting Visual Studio build environment variables and paths
-      uses: seanmiddleditch/gha-setup-vsdevenv@v1
     - name: Run CMake
       working-directory: aseprite/build
       shell: cmd
