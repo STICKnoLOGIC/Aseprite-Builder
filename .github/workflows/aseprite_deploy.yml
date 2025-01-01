@@ -1,0 +1,110 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      aseprite_url:
+        description: 'aseprite link'
+        required: true
+        type: string
+      version:
+        description: 'aseprite version'
+        required: true
+        type: string
+      name:
+        #aseprite url
+        #aseprite version
+        #timestamp
+        #build date
+
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+        # The data type of the input
+        type: string
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  Aseprite_Builder:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Install ninja
+      uses: seanmiddleditch/gha-setup-ninja@v1
+    - name: Get Skia from cache
+      id: skia-cache
+      uses: actions/cache@v2
+      with:
+        path: skia
+        key: skia-cache
+    - name: Install skia
+      if: steps.skia-cache.outputs.cache-hit != 'true'
+      run: |
+          curl -o Skia-${{ runner.os }}-Release-X64.zip -L https://github.com/aseprite/skia/releases/download/m81-b607b32047/Skia-${{ runner.os }}-Release-X64.zip
+          unzip Skia-${{ runner.os }}-Release-X64.zip -d skia
+    - name: Download Aseprite Source Code
+      run: |
+        curl -o Aseprite-source.zip -L ${{ inputs.aseprite_url }}
+        unzip Aseprite-source.zip -d aseprite
+        mkdir -p aseprite/build
+    - name: Set architecture for the produced binary
+      shell: cmd
+      run: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
+    - name: Setting Visual Studio build environment variables and paths
+      uses: seanmiddleditch/gha-setup-vsdevenv@v1
+    - name: Run CMake
+      working-directory: aseprite/build
+      shell: cmd
+      run: cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_IGNORE_PATH='C:/ProgramData/chocolatey/bin/;C:/Strawberry/c/bin/' -DLAF_BACKEND=skia -DSKIA_DIR=../../skia -DSKIA_LIBRARY_DIR=../../skia/out/Release-x64 -G Ninja ..
+    - name: Branding 1
+      working-directory: aseprite/build/src/ver
+      shell: cmd
+      run: |
+       del /F /Q generated_version.h
+       echo "#define VERSION \"${{inputs.version}} - (Compiled by STICKnoLOGIC)\"" > generated_version.h
+    - name: Run ninja
+      working-directory: aseprite/build
+      run: ninja aseprite
+    - name: Clean up build
+      working-directory: aseprite/build/bin
+      shell: bash
+      run: rm -f gen modp_b64_gen gen.exe gen.exe.manifest modp_b64_gen.exe modp_b64_gen.exe.manifest
+    - name: Initialize setup exe
+      shell: bash
+      run: |
+          7z x is.zip -o ./is
+          7z x bin.zip -o ./aseprite/build/bin
+    - name: Branding 2
+      working-directory: aseprite/build/bin
+      shell: bash
+      run: |
+         ver=${{inputs.version}}
+         date=$(date '+%Y-%m-%d')
+         ts=$(date '%s')
+         sed -i "s/x.x.x/${ver}/g" INTRO.txt
+         sed -i 's/x\/x\/x/${date}/g' INTRO.txt
+         sed -i "s/x.x.x/v${ver}/g" installer.iss
+         sed -i "s/ff\/ff//g" installer.iss
+         sed -i "s/TT/${ts}/g" installer.iss
+         echo ################################
+         echo $ts
+    - name: Run iss
+      working-directory: iss
+      run: ./iscc.exe ../aseprite/build/bin/installer.iss
+    - name: artifating
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-artifact
+        path: aseprite/build/bin/aseprite-${{inputs.version}}.exe
