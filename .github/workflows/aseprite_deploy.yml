@@ -84,8 +84,8 @@ jobs:
     - name: Initialize setup exe
       shell: bash
       run: |
-          7z x is.zip -o ./is
-          7z x bin.zip -o ./aseprite/build/bin
+          7z x is.zip -o./is
+          7z x bin.zip -o./aseprite/build/bin
     - name: Branding 2
       working-directory: aseprite/build/bin
       shell: bash
