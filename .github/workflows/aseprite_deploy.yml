@@ -41,6 +41,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
+    - name: Initialize runner
+      uses: actions/checkout@master
     - name: Install ninja
       uses: seanmiddleditch/gha-setup-ninja@master
     - name: Get Skia from cache
@@ -81,7 +83,7 @@ jobs:
       working-directory: aseprite/build/bin
       shell: bash
       run: rm -f gen modp_b64_gen gen.exe gen.exe.manifest modp_b64_gen.exe modp_b64_gen.exe.manifest
-    - name: Initialize setup 
+    - name: Initialize setup maker
       uses: actions/checkout@master
       shell: bash
       run: |
