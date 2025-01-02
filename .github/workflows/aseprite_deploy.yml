@@ -68,8 +68,9 @@ jobs:
             -DENABLE_SCRIPTING=$enable_scripting \
             -DENABLE_CCACHE=$enable_ccache \
             -DLAF_BACKEND=$laf_backend \
-            -DSKIA_DIR=skia \
-            -DSKIA_LIBRARY_DIR=skia/out/Release-$skia_arch
+            -DSKIA_DIR=../skia \
+            -DSKIA_LIBRARY_DIR=../skia/out/Release-$skia_arch \
+            -DSKIA_LIBRARY=../skia/out/Release-$skia_arch\skia.lib 
     - name: Branding 1
       working-directory: aseprite/build/src/ver
       shell: bash
