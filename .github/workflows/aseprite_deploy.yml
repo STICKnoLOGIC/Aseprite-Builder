@@ -114,3 +114,8 @@ jobs:
       with:
         name: my-artifact
         path: aseprite/build/bin/aseprite-v${{inputs.version}}.exe
+    - name: Upload artifact1
+      uses: actions/upload-artifact@master
+      with:
+        name: my-artifact1
+        path: aseprite/build/bin
