@@ -98,9 +98,9 @@ jobs:
          date=$(date '+%Y-%m-%d')
          ts=$(date '+%s')
          sed -i "s/x.x.x/${ver}/g" INTRO.txt
-         sed -i 's/x\/x\/x/${date}/g' INTRO.txt
+         sed -i 's&x/x/x&${date}&g' INTRO.txt
          sed -i "s/x.x.x/v${ver}/g" installer.iss
-         sed -i "s/ff\/ff/${pwd}/g" installer.iss
+         sed -i "s&ff/ff&${pwd}&g" installer.iss
          sed -i "s/TT/${ts}/g" installer.iss
          echo "################################"
          echo $ts
