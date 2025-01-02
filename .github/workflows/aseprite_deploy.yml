@@ -53,7 +53,7 @@ jobs:
     - name: Setting Visual Studio build environment variables and paths
       uses: ilammy/msvc-dev-cmd@v1
     - name: Run CMake
-      working-directory: aseprite/build
+      working-directory: aseprite
       shell: cmd
       run: |
          export enable_ccache=off
