@@ -87,14 +87,14 @@ jobs:
     - name: Initialize innosetup
       shell: bash
       run: |
-          ls
-          pwd
           unzip is.zip -d is
           unzip bin.zip -d aseprite/build/bin
     - name: Branding 2
       working-directory: aseprite/build/bin
       shell: bash
       run: |
+         ls
+         pwd
          ver=${{inputs.version}}
          date=$(date '+%Y-%m-%d')
          ts=$(date '+%s')
