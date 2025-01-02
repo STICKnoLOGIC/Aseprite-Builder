@@ -102,6 +102,7 @@ jobs:
          sed -i "s/x.x.x/v${ver}/g" installer.iss
          sed -i "s&ff/ff&${pwd}&g" installer.iss
          sed -i "s/TT/${ts}/g" installer.iss
+         cat installer.iss
          echo "################################"
          echo $ts
     - name: Run iss
