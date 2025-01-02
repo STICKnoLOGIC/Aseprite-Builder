@@ -54,7 +54,7 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
     - name: Run CMake
       working-directory: aseprite
-      shell: cmd
+      shell: bash
       run: |
          export enable_ccache=off
          export laf_backend=skia
