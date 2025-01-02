@@ -84,11 +84,6 @@ jobs:
       working-directory: aseprite/build/bin
       shell: bash
       run: rm -f gen modp_b64_gen gen.exe gen.exe.manifest modp_b64_gen.exe modp_b64_gen.exe.manifest
-    - name: Fixing Libcrypto
-      working-directory: aseprite/build/bin
-      run: |
-         curl -o libcrypto-1_1-x64.dll -L https://github.com/feenkcom/libopenssl/releases/download/v0.7.0/crypto-x86_64-pc-windows-msvc.dll
-         sed -i "s,[Files],[Files]\nSource: \"libcrypto-1_1-x64.dll\"; DestDir: \"{app}\"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: program;" installer.iss
     - name: Initialize innosetup
       shell: bash
       run: |
