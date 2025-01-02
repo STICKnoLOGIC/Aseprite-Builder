@@ -37,7 +37,7 @@ jobs:
   Aseprite_Builder:
     # The type of runner that the job will run on
     runs-on: windows-latest
-
+  
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
@@ -45,7 +45,7 @@ jobs:
       uses: seanmiddleditch/gha-setup-ninja@master
     - name: Get Skia from cache
       id: skia-cache
-      uses: actions/cache@v2
+      uses: actions/cache@master
       with:
         path: skia
         key: skia-cache
@@ -81,7 +81,8 @@ jobs:
       working-directory: aseprite/build/bin
       shell: bash
       run: rm -f gen modp_b64_gen gen.exe gen.exe.manifest modp_b64_gen.exe modp_b64_gen.exe.manifest
-    - name: Initialize setup exe
+    - name: Initialize setup 
+      uses: actions/checkout@master
       shell: bash
       run: |
           ls
@@ -106,7 +107,7 @@ jobs:
       working-directory: iss
       run: ./iscc.exe ../aseprite/build/bin/installer.iss
     - name: artifating
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@master
       with:
         name: my-artifact
         path: aseprite/build/bin/aseprite-${{inputs.version}}.exe
