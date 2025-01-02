@@ -96,7 +96,7 @@ jobs:
       run: |
          ver=${{inputs.version}}
          date=$(date '+%Y-%m-%d')
-         ts=$(date '%s')
+         ts=$(date '+%s')
          sed -i "s/x.x.x/${ver}/g" INTRO.txt
          sed -i 's/x\/x\/x/${date}/g' INTRO.txt
          sed -i "s/x.x.x/v${ver}/g" installer.iss
