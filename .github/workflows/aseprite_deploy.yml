@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: Aseprite Builder Workflow
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -105,9 +105,9 @@ jobs:
          echo ################################
          echo $ts
     - name: Run iss
-      working-directory: iss
+      working-directory: is
       run: ./iscc.exe ../aseprite/build/bin/installer.iss
-    - name: artifating
+    - name: artifacting
       uses: actions/upload-artifact@master
       with:
         name: my-artifact
