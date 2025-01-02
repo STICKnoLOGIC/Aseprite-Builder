@@ -100,7 +100,7 @@ jobs:
          ts=$(date '+%s')
          echo $ts
          sed -i "s/x\.x\.x/${ver}/g" INTRO.txt
-         sed -i "s&x/x/x&${date}&g" INTRO.txt
+         sed -i 's&x/x/x&${date}&g' INTRO.txt
          sed -i "s/x.x.x/v${ver}/g" installer.iss
          sed -i "s&ff/ff&/&g" installer.iss
          sed -i "s/_TT/_${ts}/g" installer.iss
