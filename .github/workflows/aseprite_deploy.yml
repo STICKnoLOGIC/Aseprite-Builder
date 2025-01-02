@@ -30,7 +30,7 @@ jobs:
     - name: Initialize runner
       uses: actions/checkout@master
     - name: Install ninja
-      uses: aseprite/get-ninja@main
+    - uses: aseprite/get-ninja@main
     - name: Get Skia from cache
       id: skia-cache
       uses: actions/cache@master
@@ -51,7 +51,7 @@ jobs:
       shell: cmd
       run: call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\vsdevcmd.bat" -arch=x64
     - name: Setting Visual Studio build environment variables and paths
-      uses: ilammy/msvc-dev-cmd@v1
+    - uses: ilammy/msvc-dev-cmd@v1
     - name: Run CMake
       working-directory: aseprite/build
       shell: cmd
@@ -60,15 +60,16 @@ jobs:
          export laf_backend=skia
          export enable_scripting=off
          export skia_arch=x64
-         cmake -DCMAKE_BUILD_TYPE=Release \
-         -DCMAKE_IGNORE_PATH='C:/ProgramData/chocolatey/bin/;C:/Strawberry/c/bin/' \
-         -DLAF_BACKEND=skia \
-         -DENABLE_SCRIPTING=$enable_scripting \
-         -DENABLE_CCACHE=$enable_ccache \
-         -DSKIA_DIR=../../skia \
-         -DSKIA_LIBRARY_DIR=../../skia/out/Release-x64 \
-         -DSKIA_LIBRARY=../../skia/out/Release-x64/skia.lib \
-         -G Ninja ..
+         
+         cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
+            -DENABLE_TESTS=ON \
+            -DENABLE_SCRIPTING=$enable_scripting \
+            -DENABLE_CCACHE=$enable_ccache \
+            -DLAF_BACKEND=$laf_backend \
+            -DSKIA_DIR=skia \
+            -DSKIA_LIBRARY_DIR=skia/out/Release-$skia_arch
     - name: Branding 1
       working-directory: aseprite/build/src/ver
       shell: bash
