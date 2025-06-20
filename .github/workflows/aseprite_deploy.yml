@@ -40,7 +40,7 @@ jobs:
     - name: Install skia
       if: steps.skia-cache.outputs.cache-hit != 'true'
       run: |
-          curl -o Skia-${{ runner.os }}-Release-X64.zip -L https://github.com/aseprite/skia/releases/download/m102-861e4743af/Skia-${{ runner.os }}-Release-X64.zip
+          curl -o Skia-${{ runner.os }}-Release-X64.zip -L https://github.com/aseprite/skia/releases/download/m124-08a5439a6b/Skia-${{ runner.os }}-Release-X64.zip
           unzip Skia-${{ runner.os }}-Release-X64.zip -d skia
     - name: Download Aseprite Source Code
       run: |
@@ -52,9 +52,11 @@ jobs:
       run: call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\vsdevcmd.bat" -arch=x64
     - name: Setting Visual Studio build environment variables and paths
       uses: ilammy/msvc-dev-cmd@v1
+      with:
+        sdK: 10.0.26100.0
+        vsversion: 2022
     - name: Run CMake
       working-directory: aseprite
-      shell: bash
       run: |
          export enable_ccache=off
          export laf_backend=skia
