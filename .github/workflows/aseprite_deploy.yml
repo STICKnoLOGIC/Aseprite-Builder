@@ -57,6 +57,7 @@ jobs:
         vsversion: 2022
     - name: Run CMake
       working-directory: aseprite
+      shell: bash
       run: |
          export enable_ccache=off
          export laf_backend=skia
