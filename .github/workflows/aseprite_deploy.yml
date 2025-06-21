@@ -61,11 +61,16 @@ jobs:
       run: |
          export enable_ccache=off
          export laf_backend=skia
-         export enable_scripting=off
+         export enable_scripting=ON
          export skia_arch=x64
 
          cmake -S . -B build -G Ninja \
-            -DLIBJPEG_TURBO_DIR=../skia/third_party/externals/libjpeg-turbo \
+            -DENABLE_TRIAL_MODE=OFF \
+            -DENABLE_WEBP=ON \
+            -DENABLE_PSD=ON \
+            -DENABLE_DEVMODE=OFF \
+            -DENABLE_NEWS=OFF \
+            -DENABLE_STEAM=OFF \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_OSX_DEPLOYMENT_TARGET= \
             -DENABLE_TESTS=OFF \
