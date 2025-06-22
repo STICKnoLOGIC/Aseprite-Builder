@@ -53,8 +53,9 @@ jobs:
     - name: Setting Visual Studio build environment variables and paths
       uses: ilammy/msvc-dev-cmd@v1
       with:
-        sdK: 10.0.26100.0
         vsversion: 2022
+        toolset: 17.13.6
+        sdk: 10.0.26100.0
     - name: Run CMake
       working-directory: aseprite
       shell: bash
