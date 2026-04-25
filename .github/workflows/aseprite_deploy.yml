@@ -40,7 +40,7 @@ jobs:
     - name: Install skia
       if: steps.skia-cache.outputs.cache-hit != 'true'
       run: |
-          curl -o Skia-${{ runner.os }}-Release-X64.zip -L https://github.com/aseprite/skia/releases/download/m102-861e4743af/Skia-${{ runner.os }}-Release-X64.zip
+          curl -o Skia-${{ runner.os }}-Release-X64.zip -L https://github.com/aseprite/skia/releases/download/m124-08a5439a6b/Skia-${{ runner.os }}-Release-X64.zip
           unzip Skia-${{ runner.os }}-Release-X64.zip -d skia
     - name: Download Aseprite Source Code
       run: |
@@ -63,14 +63,14 @@ jobs:
 
          cmake -S . -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=10.14 \
             -DENABLE_TESTS=ON \
             -DENABLE_SCRIPTING=$enable_scripting \
             -DENABLE_CCACHE=$enable_ccache \
             -DLAF_BACKEND=$laf_backend \
-            -DSKIA_DIR=../skia \
-            -DSKIA_LIBRARY_DIR=../skia/out/Release-$skia_arch \
-            -DSKIA_LIBRARY=../skia/out/Release-$skia_arch/skia.lib
+            -DSKIA_DIR=$(realpath ../skia) \
+            -DSKIA_LIBRARY_DIR=$(realpath ../skia/out/Release-$skia_arch) \
+            -DSKIA_LIBRARY=$(realpath ../skia/out/Release-$skia_arch/skia.lib)
     - name: Branding 1
       working-directory: aseprite/build/src/ver
       shell: bash
