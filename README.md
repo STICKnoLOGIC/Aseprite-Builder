@@ -4,6 +4,16 @@
 A GitHub Actions-based builder that compiles Aseprite into a 64-bit Windows .exe installer using Inno Setup.
 
 This repository lets you generate your own Aseprite installer by providing a source ZIP (from releases) and a version tag—all without setting up anything locally.
+
+> [!WARNING]
+> Windows may show a SmartScreen warning when running the installer because it is **not code-signed**.
+>
+> This is expected for custom-built binaries from GitHub Actions.
+>
+> To run the installer:
+> 1. Click **More info**
+> 2. Click **Run anyway**
+
 ------
 ## 🚀 Features
 - Build Aseprite (64-bit Windows) automatically
@@ -11,11 +21,14 @@ This repository lets you generate your own Aseprite installer by providing a sou
 - Accepts release ZIP source files
 - Outputs a password-protected .exe installer
 - Built and packaged with Inno Setup
+
 -----
+
 ## ads (click to support and help this project)
 [![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=sticknologic/aseprite-builder@github)](https://gitads.dev/v1/ad-track?source=sticknologic/aseprite-builder@github)
 
 -----
+
 ## 📦 How It Works
 
 The workflow is triggered manually via GitHub Actions (`workflow_dispatch`).
@@ -31,7 +44,9 @@ The workflow is triggered manually via GitHub Actions (`workflow_dispatch`).
 3. Package it into an installer using Inno Setup
 4. Protect the installer with a password
 5. Upload the .exe as a GitHub artifact
+
 -----
+
 # ▶️ Usage
 1. Open Actions
   - Go to the Actions tab in this repository
@@ -43,7 +58,9 @@ Click "Run workflow" and fill in:
 aseprite_url: https://github.com/aseprite/aseprite/archive/refs/tags/v1.3.16.zip
 version: 1.3.16
 ```
+
 -----
+
 ## 📥 Output
 
 After the workflow finishes:
@@ -56,16 +73,22 @@ After the workflow finishes:
 ### File Inclusion:
 - the exe file (e.g. `aseprite-v1.3.181`)
 - password.txt
+
 -----
+
 ## ⚠️ Important Notes
 - `aseprite_url` must be a ZIP file from a release, not a repo link
 - The password is not static—it changes per build
 - This project/repo **does not provide prebuilt binaries**
+
 -----
+
 ## 🛠️ Requirements
 - A GitHub account
 - GitHub Actions enabled in your repository
+
 -----
+
 ## 📄 License
 This repository is licensed under the [`GNU General Public License v3.0 (GPL-3.0)`](https://github.com/STICKnoLOGIC/Aseprite-Builder/blob/main/LICENSE).
 
