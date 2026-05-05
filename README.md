@@ -12,6 +12,10 @@ This repository lets you generate your own Aseprite installer by providing a sou
 - Outputs a password-protected .exe installer
 - Built and packaged with Inno Setup
 -----
+## ads (click to support and help this project)
+[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=sticknologic/aseprite-builder@github)](https://gitads.dev/v1/ad-track?source=sticknologic/aseprite-builder@github)
+
+-----
 ## 📦 How It Works
 
 The workflow is triggered manually via GitHub Actions (`workflow_dispatch`).
