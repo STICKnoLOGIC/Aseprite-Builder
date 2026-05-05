@@ -1,3 +1,4 @@
+<!-- GitAds-Verify: 9OEI34WTOB4XO7HFB261W7P2JYYH16R1 -->
 # Aseprite Builder
 
 A GitHub Actions-based builder that compiles Aseprite into a 64-bit Windows .exe installer using Inno Setup.
