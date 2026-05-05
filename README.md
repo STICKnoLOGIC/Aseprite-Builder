@@ -62,7 +62,7 @@ After the workflow finishes:
 - GitHub Actions enabled in your repository
 -----
 ## 📄 License
-This repository is licensed under the [`GNU General Public License v3.0 (GPL-3.0)`](?tab=GPL-3.0-1-ov-file).
+This repository is licensed under the [`GNU General Public License v3.0 (GPL-3.0)`](https://github.com/STICKnoLOGIC/Aseprite-Builder/blob/main/LICENSE).
 
 ### Components & Their Licenses
 - This repository (Aseprite Builder)
