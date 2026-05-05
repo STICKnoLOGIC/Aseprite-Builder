@@ -105,7 +105,7 @@ jobs:
       with:
         retention-days: 20
         compression-level: 9
-        name: my-artifact
+        name: aseprite-build
         path: |
           aseprite/build/bin/password.txt
           aseprite/build/bin/aseprite-v${{inputs.version}}.exe
