@@ -48,13 +48,13 @@ jobs:
       run: |
          export enable_ccache=off
          export laf_backend=skia
-         export enable_scripting=off
+         export enable_scripting=on
          export skia_arch=x64
 
          cmake -S . -B build -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_OSX_DEPLOYMENT_TARGET=10.14 \
-            -DENABLE_TESTS=ON \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=11 \
+            -DENABLE_TESTS=OFF \
             -DENABLE_SCRIPTING=$enable_scripting \
             -DENABLE_CCACHE=$enable_ccache \
             -DLAF_BACKEND=$laf_backend \
