@@ -37,9 +37,9 @@ jobs:
         curl -o Aseprite-source.zip -L ${{ inputs.aseprite_url }}
         unzip Aseprite-source.zip -d aseprite
         mkdir -p aseprite/build
-    # - name: Set architecture for the produced binary
-    #   shell: cmd
-    #   run: call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\vsdevcmd.bat" -arch=x64
+    - name: Set architecture for the produced binary
+      shell: cmd
+      run: call "C:\Program Files\Microsoft Visual Studio\2026\Enterprise\Common7\Tools\vsdevcmd.bat" -arch=x64
     - name: Setting Visual Studio build environment variables and paths
       uses: TheMrMilchmann/setup-msvc-dev@v4
     - name: Run CMake
